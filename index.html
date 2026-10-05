@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="ro">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>BankFlow - Mockup</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <header class="app-header">
+        <h1>BankFlow</h1>
+
+        <p>Gestionează simplu și rapid conturile tale bancare.</p>
+
+        <p class="app-count">
+            3 conturi, dintre care 2 active
+        </p>
+    </header>
+
+
+    <main class="container">
+
+        <!-- FORMULAR -->
+
+        <section class="panel">
+
+            <h2>Adaugă cont</h2>
+
+            <form class="item-form">
+
+                <label>
+                    Nume cont
+
+                    <input
+                        type="text"
+                        name="accountName"
+                        placeholder="Ex: Cont principal"
+                    >
+                </label>
+
+
+                <label>
+                    Tip cont
+
+                    <select name="accountType">
+                        <option value="current">Cont curent</option>
+                        <option value="savings">Cont de economii</option>
+                        <option value="deposit">Depozit</option>
+                    </select>
+
+                </label>
+
+
+                <button type="submit">
+                    Adaugă cont
+                </button>
+
+            </form>
+
+        </section>
+
+
+        <!-- LISTA CONTURILOR -->
+
+        <section class="panel">
+
+            <h2>Conturile mele</h2>
+
+            <!-- Când lista este goală:
+            <p class="empty">Nu există niciun cont.</p>
+            -->
+
+            <ul class="item-list">
+
+
+                <li class="item-card">
+
+                    <div>
+                        <h3>Cont principal</h3>
+
+                        <span class="badge badge-current">
+                            Cont curent
+                        </span>
+                    </div>
+
+                    <span class="status">
+                        Activ
+                    </span>
+
+                </li>
+
+
+                <li class="item-card">
+
+                    <div>
+                        <h3>Cont economii</h3>
+
+                        <span class="badge badge-savings">
+                            Economii
+                        </span>
+                    </div>
+
+                    <span class="status">
+                        Activ
+                    </span>
+
+                </li>
+
+
+                <li class="item-card done">
+
+                    <div>
+                        <h3>Depozit vacanță</h3>
+
+                        <span class="badge badge-deposit">
+                            Depozit
+                        </span>
+                    </div>
+
+                    <span class="status">
+                        Inactiv
+                    </span>
+
+                </li>
+
+
+            </ul>
+
+        </section>
+
+    </main>
+
+
+    <footer class="app-footer">
+        Proiect Tehnologii Web · BankFlow
+    </footer>
+
+</body>
+
+</html>
