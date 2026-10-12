@@ -69,3 +69,48 @@ Details per stage: see the `ai-log/` folder.
 | S2-R5 | Original array unchanged after adding | [conturi.js L105-L121](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/f4994c2bff928a14a93603bde99620ef57808625/conturi.js#L105-L121) | Compare new list length with original |
 | S2-R6 | README Stage 2 section and AI log | [README.md](README.md), [AI log](ai-log/etapa-02.md) | Read both files |
 | S2-R7 | Stage 2 commit pushed to GitHub | [Stage 2 commit](https://github.com/wqedgheudcfbesfbnver/BankFlow/commit/f4994c2bff928a14a93603bde99620ef57808625) | Check commit history |
+
+## Stage 3: Vite and React project
+
+BankFlow is now a React application created with Vite.
+
+The application is located in the `frontend/` folder.
+
+The data from Stage 2 has been moved into the main
+React component (`App.jsx`).
+
+The application displays:
+- The BankFlow application name
+- The total number of bank accounts
+- The number of active bank accounts
+- The bank account data in JSON format
+
+The original CSS styles from Stage 1 have been reused.
+
+The application currently contains 3 bank accounts,
+of which 2 are active.
+
+## How to run
+
+Open a terminal in the project folder and run:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Then open the local address displayed in the terminal:
+
+http://localhost:5173/
+
+## Build verification
+
+To verify that the application builds successfully:
+
+```bash
+cd frontend
+npm run build
+```
+
+The build was completed successfully.
