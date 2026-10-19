@@ -236,3 +236,15 @@ Details for each stage are documented in the `ai-log/` folder.
 | S3-R5 | node_modules ignored, build passes | [.gitignore](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/49c1a4d/frontend/.gitignore) | Run npm run build and inspect Git status |
 | S3-R6 | README Stage 3 section and AI log | [README](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/49c1a4d/README.md), [AI log](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/49c1a4d/ai-log/etapa-03.md) | Read the documentation |
 | S3-R7 | Stage 3 commit pushed | [Stage 3 commit](https://github.com/wqedgheudcfbesfbnver/BankFlow/commit/49c1a4d) | Check the GitHub commit history |
+
+## Stage 4: Verification Checklist
+
+| ID | Requirement | Where (permalink) | How to check |
+| --- | --- | --- | --- |
+| S4-R1 | Reusable React components | [ContCard.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/ea039bc/frontend/src/components/ContCard.jsx), [ContList.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/ea039bc/frontend/src/components/ContList.jsx) | Check the two React components |
+| S4-R2 | Props used to pass account data | [App.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/ea039bc/frontend/src/App.jsx), [ContList.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/ea039bc/frontend/src/components/ContList.jsx) | Verify data transmission through props |
+| S4-R3 | List rendering using map() and unique keys | [ContList.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/ea039bc/frontend/src/components/ContList.jsx) | Check map() and key={cont.id} |
+| S4-R4 | Empty list handled correctly | [ContList.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/ea039bc/frontend/src/components/ContList.jsx) | Replace the account array with [] and verify the message |
+| S4-R5 | Account status changes card appearance | [ContCard.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/ea039bc/frontend/src/components/ContCard.jsx) | Change activ to false and verify the style |
+| S4-R6 | README and AI documentation | [README.md](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/ea039bc/README.md), [AI log](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/ea039bc/ai-log/etapa-04.md) | Read both documentation files |
+| S4-R7 | Stage 4 commit pushed to GitHub | [Stage 4 commit](https://github.com/wqedgheudcfbesfbnver/BankFlow/commit/ea039bc) | Check the GitHub commit history |
