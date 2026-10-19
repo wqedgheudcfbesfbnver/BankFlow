@@ -1,3 +1,4 @@
+
 # BankFlow
 
 BankFlow is a web application for managing bank accounts. It allows users to organize and monitor different types of bank accounts.
@@ -26,6 +27,7 @@ The initial dataset contains 3 bank accounts, of which 2 are active.
 
 - `mockup/` – HTML, CSS and JavaScript files from Stages 1 and 2.
 - `frontend/` – React application created with Vite in Stage 3.
+- `frontend/src/components/` – Reusable React components created in Stage 4.
 - `ai-log/` – Documentation of AI assistance for each stage.
 - `README.md` – Project documentation and verification checklists.
 
@@ -72,13 +74,13 @@ The functions are tested using messages displayed in the browser console.
 
 ## Stage 3: Vite and React project
 
-BankFlow has been migrated to a React application using Vite.
+BankFlow was migrated to a React application using Vite.
 
 The application is located in the `frontend/` folder.
 
-The JavaScript data from Stage 2 is reused in the React component `frontend/src/App.jsx`.
+The JavaScript data from Stage 2 was reused in the React component `frontend/src/App.jsx`.
 
-The application displays:
+In Stage 3, the application displayed:
 
 - The BankFlow application name.
 - The total number of bank accounts.
@@ -87,11 +89,74 @@ The application displays:
 
 The account counters are calculated dynamically from the data array.
 
-The original CSS styles from Stage 1 have been reused in `frontend/src/App.css`, with layout adjustments for the React interface.
+The original CSS styles from Stage 1 were reused in `frontend/src/App.css`, with layout adjustments for the React interface.
 
-The application currently contains 3 bank accounts, of which 2 are active.
+The application contains 3 bank accounts, of which 2 are active.
 
-### Technologies used
+## Stage 4: Components rendered from data
+
+Stage 4 replaces the temporary JSON display from Stage 3 with reusable React components.
+
+The bank accounts are displayed as individual cards generated dynamically from the data array.
+
+Two components were created in `frontend/src/components/`:
+
+- `ContCard.jsx` receives a single bank account through props and displays its name, account type and status.
+- `ContList.jsx` receives the entire bank account array and renders one `ContCard` component for each account.
+
+### React components and props
+
+The main component `App.jsx` contains the bank account data and calculates the number of active accounts.
+
+The complete array is passed to `ContList` through props.
+
+`ContList` uses the JavaScript `map()` method to generate one card for each account.
+
+Each card receives a unique and stable key using `key={cont.id}`.
+
+The individual account data is passed to `ContCard` through props.
+
+Adding another account to the array automatically generates another card without modifying the JSX structure.
+
+### Conditional rendering
+
+The application uses conditional rendering to display different content depending on the data.
+
+If the account array is empty, the application displays:
+
+`Nu exista niciun cont bancar.`
+
+The header also updates automatically to display zero accounts and zero active accounts.
+
+### Account status
+
+Each account has an `activ` property.
+
+- `true` indicates an active account.
+- `false` indicates an inactive account.
+
+The card appearance changes automatically depending on this property.
+
+Inactive accounts are displayed with a different style and a crossed-out account name.
+
+### Stage 4: Testing
+
+The following tests were performed:
+
+- Verified that three account cards are generated from the data array.
+- Verified that each card displays the correct account name, type and status.
+- Verified that the browser console contains no React errors or warnings.
+- Tested an empty array and confirmed that the empty-list message appears.
+- Verified that the account counters display zero when the array is empty.
+- Changed the first account from active to inactive.
+- Verified that the card appearance and active account counter update automatically.
+- Restored the original bank account data after testing.
+
+The final application contains 3 bank accounts, of which 2 are active.
+
+The visual interface preserves the styling introduced in Stage 1.
+
+## Technologies used
 
 - HTML5
 - CSS3
@@ -111,7 +176,7 @@ No installation or build step is required.
 
 For Stage 2, open the browser developer tools using F12 to inspect the JavaScript console output.
 
-### Stage 3: React application
+### Stages 3 and 4: React application
 
 Open a terminal in the main project directory and run:
 
@@ -125,7 +190,9 @@ Open the local address displayed by Vite, usually:
 
 http://localhost:5173/
 
-The React application should display the BankFlow interface, the bank account counter and the JSON data.
+The React application displays the BankFlow interface, the bank account counters and dynamically generated account cards.
+
+In Stage 4, the account cards are rendered using the `ContList` and `ContCard` components.
 
 ## Build verification
 
@@ -135,7 +202,7 @@ From the `frontend/` directory, run:
 npm run build
 ```
 
-The production build was tested successfully.
+The production build was tested successfully in Stages 3 and 4.
 
 The generated `dist/` folder and the `node_modules/` folder are excluded from Git tracking through `.gitignore`.
 
@@ -146,6 +213,7 @@ The generated `dist/` folder and the `node_modules/` folder are excluded from Gi
 | ChatGPT | Project structure, HTML and CSS implementation for Stage 1 |
 | ChatGPT | JavaScript data logic, validation and console testing for Stage 2 |
 | ChatGPT | Vite setup, React component development, CSS migration and Git workflow for Stage 3 |
+| ChatGPT | React components, props, list rendering, conditional rendering and testing for Stage 4 |
 
 Details for each stage are documented in the `ai-log/` folder.
 
@@ -154,6 +222,8 @@ Details for each stage are documented in the `ai-log/` folder.
 - [x] Stage 1: Static mockup
 - [x] Stage 2: Data logic in JavaScript
 - [x] Stage 3: Vite and React project
+- [x] Stage 4: Components rendered from data
+- [ ] Stage 5: Local state and events
 
 ## Stage 3: Verification Checklist
 

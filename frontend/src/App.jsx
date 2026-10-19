@@ -1,7 +1,12 @@
 
 /* =========================
+   IMPORT COMPONENTE
+========================= */
+
+import ContList from "./components/ContList.jsx";
+
+/* =========================
    DATELE CONTURILOR BANCARE
-   Preluate din Etapa 2
 ========================= */
 
 const conturi = [
@@ -61,11 +66,8 @@ export default function App() {
 
           <h2>Conturile mele</h2>
 
-          {/* Etapa 3: afisam temporar datele JSON */}
-
-          <pre>
-            {JSON.stringify(conturi, null, 2)}
-          </pre>
+          {/* Afisam lista prin componenta ContList */}
+          <ContList conturi={conturi} />
 
         </section>
 
