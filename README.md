@@ -429,3 +429,15 @@ Details for each stage are documented in the `ai-log/` folder.
 | S4-R5 | Account status changes card appearance | [ContCard.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/ea039bc/frontend/src/components/ContCard.jsx) | Change activ to false and verify the style |
 | S4-R6 | README and AI documentation | [README.md](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/ea039bc/README.md), [AI log](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/ea039bc/ai-log/etapa-04.md) | Read both documentation files |
 | S4-R7 | Stage 4 commit pushed to GitHub | [Stage 4 commit](https://github.com/wqedgheudcfbesfbnver/BankFlow/commit/ea039bc) | Check the GitHub commit history |
+## Stage 5: Verification Checklist
+
+| ID | Requirement | Where (permalink) | How to check |
+| --- | --- | --- | --- |
+| S5-R1 | Bank accounts stored in React local state using useState | [App.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/3ea59d28dc99880b6236bbe5dd5d1d91e716a214/frontend/src/App.jsx) | Check the useState hook and initial bank account data |
+| S5-R2 | Controlled checkboxes activate and deactivate accounts | [ContCard.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/3ea59d28dc99880b6236bbe5dd5d1d91e716a214/frontend/src/components/ContCard.jsx) | Click a checkbox and verify that the account status changes |
+| S5-R3 | Immutable state updates using map() and filter() | [App.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/3ea59d28dc99880b6236bbe5dd5d1d91e716a214/frontend/src/App.jsx) | Check handleToggle and handleDelete |
+| S5-R4 | Delete button removes accounts from the interface | [ContCard.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/3ea59d28dc99880b6236bbe5dd5d1d91e716a214/frontend/src/components/ContCard.jsx) | Click Delete and verify that the selected account disappears |
+| S5-R5 | Account counters update automatically from state | [App.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/3ea59d28dc99880b6236bbe5dd5d1d91e716a214/frontend/src/App.jsx) | Activate, deactivate or delete accounts and verify the counters |
+| S5-R6 | Light and dark theme switching | [App.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/3ea59d28dc99880b6236bbe5dd5d1d91e716a214/frontend/src/App.jsx), [App.css](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/3ea59d28dc99880b6236bbe5dd5d1d91e716a214/frontend/src/App.css) | Click the theme toggle button and verify the interface colors |
+| S5-R7 | README documentation and AI log | [README.md](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/3ea59d28dc99880b6236bbe5dd5d1d91e716a214/README.md), [AI log](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/3ea59d28dc99880b6236bbe5dd5d1d91e716a214/ai-log/etapa-05.md) | Read the Stage 5 documentation |
+| S5-R8 | Stage 5 implementation committed and pushed to GitHub | [Stage 5 commit](https://github.com/wqedgheudcfbesfbnver/BankFlow/commit/3ea59d28dc99880b6236bbe5dd5d1d91e716a214) | Check the GitHub commit history |
