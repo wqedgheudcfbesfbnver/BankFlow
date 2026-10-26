@@ -1,4 +1,3 @@
-
 /* =========================
    SETARI GENERALE
 ========================= */
@@ -45,6 +44,7 @@ body {
 ========================= */
 
 .app-header {
+    position: relative;
     background: var(--accent);
     color: white;
     text-align: center;
@@ -66,6 +66,33 @@ body {
 }
 
 /* =========================
+   ETAPA 5 - BUTON LIGHT/DARK MODE
+========================= */
+
+.theme-toggle {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+
+    padding: 6px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    border-radius: 8px;
+
+    background: transparent;
+    color: #ffffff;
+
+    font: inherit;
+    font-size: 14px;
+    cursor: pointer;
+
+    transition: background 0.2s;
+}
+
+.theme-toggle:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+/* =========================
    CONTAINER PRINCIPAL
 ========================= */
 
@@ -73,9 +100,8 @@ body {
     max-width: 1000px;
     margin: 24px auto;
     padding: 0 16px;
-    display: grid;
 
-    /* Etapa 3: un singur panou */
+    display: grid;
     grid-template-columns: 1fr;
 
     gap: 24px;
@@ -257,14 +283,21 @@ body {
     .container {
         grid-template-columns: 1fr;
     }
+
+    .app-header {
+        padding-top: 55px;
+    }
 }
 
 /* =========================
-   DARK MODE
+   ETAPA 5 - DARK MODE AUTOMAT
 ========================= */
 
+/* Tema sistemului se aplica automat
+   daca utilizatorul nu a ales modul luminos */
+
 @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
         --bg: #111827;
         --card: #1f2937;
         --text: #f3f4f6;
@@ -272,4 +305,58 @@ body {
         --border: #374151;
         --accent-soft: #172554;
     }
+}
+
+/* =========================
+   ETAPA 5 - DARK MODE MANUAL
+========================= */
+
+/* Tema intunecata selectata din buton */
+
+:root[data-theme="dark"] {
+    --bg: #111827;
+    --card: #1f2937;
+    --text: #f3f4f6;
+    --muted: #9ca3af;
+    --border: #374151;
+    --accent-soft: #172554;
+}
+
+/* =========================
+   ETAPA 5 - CHECKBOX CONTURI
+========================= */
+
+.item-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    cursor: pointer;
+}
+
+.item-main input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+    cursor: pointer;
+}
+
+/* =========================
+   ETAPA 5 - BUTON STERGERE
+========================= */
+
+.btn-danger {
+    border: 1px solid #dc3545;
+    background: transparent;
+    color: #dc3545;
+    border-radius: 8px;
+    padding: 6px 12px;
+
+    font: inherit;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-danger:hover {
+    background: #dc3545;
+    color: #ffffff;
 }

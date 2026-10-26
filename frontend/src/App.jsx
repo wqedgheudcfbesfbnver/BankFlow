@@ -1,15 +1,15 @@
-
 /* =========================
-   IMPORT COMPONENTE
+   IMPORTURI
 ========================= */
 
+import { useState } from "react";
 import ContList from "./components/ContList.jsx";
 
 /* =========================
-   DATELE CONTURILOR BANCARE
+   DATELE INITIALE ALE CONTURILOR
 ========================= */
 
-const conturi = [
+const CONTURI_INITIALE = [
   {
     id: 1,
     nume: "Cont curent",
@@ -31,12 +31,70 @@ const conturi = [
 ];
 
 /* =========================
+   TEMA INITIALA
+========================= */
+
+// Detectam tema sistemului de operare
+function temaInitiala() {
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
+/* =========================
    COMPONENTA PRINCIPALA
 ========================= */
 
 export default function App() {
 
-  // Calculam numarul conturilor active
+  // State pentru conturile bancare
+  const [conturi, setConturi] = useState(CONTURI_INITIALE);
+
+  // State pentru tema aplicatiei
+  const [tema, setTema] = useState(temaInitiala);
+
+  /* =========================
+     ACTIVARE / DEZACTIVARE CONT
+  ========================= */
+
+  function handleToggle(id) {
+    setConturi((prev) =>
+      prev.map((cont) =>
+        cont.id === id
+          ? { ...cont, activ: !cont.activ }
+          : cont
+      )
+    );
+  }
+
+  /* =========================
+     STERGERE CONT
+  ========================= */
+
+  function handleDelete(id) {
+    setConturi((prev) =>
+      prev.filter((cont) => cont.id !== id)
+    );
+  }
+
+  /* =========================
+     SCHIMBAREA TEMEI
+  ========================= */
+
+  function handleTema() {
+    const noua = tema === "dark" ? "light" : "dark";
+
+    // Actualizam state-ul
+    setTema(noua);
+
+    // Aplicam tema pe elementul HTML
+    document.documentElement.dataset.theme = noua;
+  }
+
+  /* =========================
+     NUMAR CONTURI ACTIVE
+  ========================= */
+
   const active = conturi.filter(
     (cont) => cont.activ === true
   ).length;
@@ -46,6 +104,17 @@ export default function App() {
       {/* ANTETUL APLICATIEI */}
 
       <header className="app-header">
+
+        {/* BUTON LIGHT / DARK MODE */}
+
+        <button
+          className="theme-toggle"
+          onClick={handleTema}
+          aria-pressed={tema === "dark"}
+        >
+          {tema === "dark" ? "Mod luminos" : "Mod întunecat"}
+        </button>
+
         <h1>BankFlow</h1>
 
         <p>
@@ -56,6 +125,7 @@ export default function App() {
           {conturi.length} conturi bancare,
           dintre care {active} active
         </p>
+
       </header>
 
       {/* CONTINUTUL PRINCIPAL */}
@@ -66,8 +136,11 @@ export default function App() {
 
           <h2>Conturile mele</h2>
 
-          {/* Afisam lista prin componenta ContList */}
-          <ContList conturi={conturi} />
+          <ContList
+            conturi={conturi}
+            onToggle={handleToggle}
+            onDelete={handleDelete}
+          />
 
         </section>
 

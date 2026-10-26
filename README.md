@@ -1,4 +1,3 @@
-
 # BankFlow
 
 BankFlow is a web application for managing bank accounts. It allows users to organize and monitor different types of bank accounts.
@@ -156,6 +155,184 @@ The final application contains 3 bank accounts, of which 2 are active.
 
 The visual interface preserves the styling introduced in Stage 1.
 
+## Stage 5: Local state and events
+
+Stage 5 transforms BankFlow from a static React interface into an interactive bank account management application.
+
+The application now uses React local state to manage bank accounts dynamically.
+
+Users can activate, deactivate and delete bank accounts directly from the interface without modifying the source code.
+
+The application also includes a button for switching between light mode and dark mode.
+
+### React useState
+
+The bank account list is stored in the App component using React `useState`.
+
+The initial data contains three bank accounts:
+
+1. Cont curent - active - Current
+2. Cont economii - active - Savings
+3. Depozit vacanta - inactive - Deposit
+
+The initial array is defined as `CONTURI_INITIALE`.
+
+The `useState` hook creates two variables:
+
+- `conturi`: stores the current bank account list.
+- `setConturi`: updates the bank account list.
+
+Whenever the state changes, React automatically updates the interface.
+
+### Activating and deactivating accounts
+
+Each bank account card contains a controlled checkbox.
+
+The checkbox reflects the current value of the `activ` property.
+
+The `handleToggle` function activates or deactivates an account using its unique ID.
+
+The function uses `map()` to create a new array and the spread operator to create an updated account object.
+
+The original state is not modified directly.
+
+When an account is deactivated:
+
+- The checkbox becomes unchecked.
+- The account status changes to Inactiv.
+- The account name appears crossed out.
+- The active account counter decreases automatically.
+
+When an account is activated, the opposite changes occur.
+
+### Deleting bank accounts
+
+Each account card contains a Delete button.
+
+The `handleDelete` function removes the selected account using its unique ID.
+
+The function uses `filter()` to create a new array without the deleted account.
+
+The account disappears immediately from the interface.
+
+The total number of accounts and the active account counter update automatically.
+
+If all accounts are deleted, the application displays:
+
+`Nu exista niciun cont bancar.`
+
+### Derived values
+
+The number of active bank accounts is calculated directly from the current state.
+
+The application uses `filter()` to count accounts where `activ` is `true`.
+
+The active account counter is not stored in a separate `useState` variable.
+
+This prevents inconsistencies between the account list and the displayed counter.
+
+### Props and event handling
+
+The `App` component manages the application state.
+
+The `ContList` component receives the account list and event handler functions through props.
+
+The `ContCard` component receives:
+
+- `cont`: the bank account data.
+- `onToggle`: the function used to activate or deactivate an account.
+- `onDelete`: the function used to delete an account.
+
+The checkbox uses the `onChange` event.
+
+The Delete button uses the `onClick` event.
+
+The Delete button also includes an `aria-label` attribute for accessibility.
+
+The data flow follows this structure:
+
+`App.jsx -> ContList.jsx -> ContCard.jsx`
+
+The state is managed in `App.jsx`, while child components communicate user actions through callback functions.
+
+### Immutable state updates
+
+All state updates are performed immutably.
+
+The application uses:
+
+- `map()` to update an account.
+- `filter()` to delete an account.
+- The spread operator to create updated objects.
+- Functional state updates with `setConturi((prev) => ...)`.
+
+The application does not use `push()`, `splice()` or direct assignments to modify React state.
+
+### Light mode and dark mode
+
+Stage 5 introduces a theme toggle button in the application header.
+
+Users can switch between light mode and dark mode without reloading the page.
+
+The current theme is stored using React `useState`.
+
+The initial theme is determined by the operating system preference using `matchMedia()`.
+
+The `handleTema` function changes the current theme.
+
+The selected theme is applied to the HTML element using the `data-theme` attribute.
+
+CSS variables control the background, card, text and border colors.
+
+The button also uses `aria-pressed` for accessibility.
+
+The selected theme takes priority over the operating system preference.
+
+### Local state limitations
+
+The bank account list and selected theme are stored only in React local state.
+
+Changes are not permanently saved.
+
+When the page is refreshed:
+
+- The original three bank accounts are restored.
+- The initial active account counter is restored.
+- The theme returns to the operating system preference.
+
+Persistent data storage will be introduced in later stages.
+
+### Stage 5: Testing
+
+The following functionality should be verified in the browser:
+
+- The three initial bank accounts are displayed correctly.
+- Each account contains a controlled checkbox.
+- Activating an account updates its status and appearance.
+- Deactivating an account updates its status and appearance.
+- The active account counter updates automatically.
+- The Delete button removes the selected account.
+- Deleting all accounts displays the empty-list message.
+- The total account counter displays zero when the list is empty.
+- The light mode and dark mode button changes the application theme.
+- The theme can be switched in both directions.
+- Refreshing the page restores the initial data.
+- The browser console contains no React errors or warnings.
+
+### Stage 5: Files modified
+
+The following files were modified:
+
+- `frontend/src/App.jsx`
+- `frontend/src/App.css`
+- `frontend/src/components/ContList.jsx`
+- `frontend/src/components/ContCard.jsx`
+
+The following documentation files are updated:
+
+- `README.md`
+- `ai-log/etapa-05.md`
+
 ## Technologies used
 
 - HTML5
@@ -176,7 +353,7 @@ No installation or build step is required.
 
 For Stage 2, open the browser developer tools using F12 to inspect the JavaScript console output.
 
-### Stages 3 and 4: React application
+### Stages 3–5: React application
 
 Open a terminal in the main project directory and run:
 
@@ -188,11 +365,13 @@ npm run dev
 
 Open the local address displayed by Vite, usually:
 
-http://localhost:5173/
+`http://localhost:5173/`
 
 The React application displays the BankFlow interface, the bank account counters and dynamically generated account cards.
 
 In Stage 4, the account cards are rendered using the `ContList` and `ContCard` components.
+
+In Stage 5, users can activate, deactivate and delete bank accounts, and switch between light and dark themes.
 
 ## Build verification
 
@@ -214,6 +393,7 @@ The generated `dist/` folder and the `node_modules/` folder are excluded from Gi
 | ChatGPT | JavaScript data logic, validation and console testing for Stage 2 |
 | ChatGPT | Vite setup, React component development, CSS migration and Git workflow for Stage 3 |
 | ChatGPT | React components, props, list rendering, conditional rendering and testing for Stage 4 |
+| ChatGPT | React useState, immutable state updates, event handling, controlled checkboxes, account deletion, theme switching and documentation for Stage 5 |
 
 Details for each stage are documented in the `ai-log/` folder.
 
@@ -223,7 +403,8 @@ Details for each stage are documented in the `ai-log/` folder.
 - [x] Stage 2: Data logic in JavaScript
 - [x] Stage 3: Vite and React project
 - [x] Stage 4: Components rendered from data
-- [ ] Stage 5: Local state and events
+- [x] Stage 5: Local state and events
+- [ ] Stage 6: Loading data from a mock API
 
 ## Stage 3: Verification Checklist
 

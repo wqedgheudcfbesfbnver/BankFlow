@@ -1,11 +1,10 @@
-
 /* =========================
    COMPONENTA LISTEI DE CONTURI
 ========================= */
 
 import ContCard from "./ContCard.jsx";
 
-export default function ContList({ conturi }) {
+export default function ContList({ conturi, onToggle, onDelete }) {
 
   // Verificam daca lista este goala
   if (conturi.length === 0) {
@@ -23,6 +22,8 @@ export default function ContList({ conturi }) {
         <ContCard
           key={cont.id}
           cont={cont}
+          onToggle={onToggle}
+          onDelete={onDelete}
         />
       ))}
     </ul>
