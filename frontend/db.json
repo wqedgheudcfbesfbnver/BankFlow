@@ -1,0 +1,45 @@
+
+{
+  "conturi": [
+    {
+      "id": 1,
+      "accountName": "Cont curent",
+      "active": true,
+      "accountType": "Current",
+      "category": "Personal",
+      "user": "Ana"
+    },
+    {
+      "id": 2,
+      "accountName": "Cont economii",
+      "active": true,
+      "accountType": "Savings",
+      "category": "Savings",
+      "user": "Ana"
+    },
+    {
+      "id": 3,
+      "accountName": "Depozit vacanta",
+      "active": false,
+      "accountType": "Deposit",
+      "category": "Savings",
+      "user": "Ana"
+    },
+    {
+      "id": 4,
+      "accountName": "Cont salariu",
+      "active": true,
+      "accountType": "Current",
+      "category": "Salary",
+      "user": "Ana"
+    },
+    {
+      "id": 5,
+      "accountName": "Depozit pentru masina",
+      "active": false,
+      "accountType": "Deposit",
+      "category": "Personal",
+      "user": "Ana"
+    }
+  ]
+}

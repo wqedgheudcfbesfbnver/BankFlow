@@ -441,3 +441,87 @@ Details for each stage are documented in the `ai-log/` folder.
 | S5-R6 | Light and dark theme switching | [App.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/3ea59d28dc99880b6236bbe5dd5d1d91e716a214/frontend/src/App.jsx), [App.css](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/3ea59d28dc99880b6236bbe5dd5d1d91e716a214/frontend/src/App.css) | Click the theme toggle button and verify the interface colors |
 | S5-R7 | README documentation and AI log | [README.md](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/3ea59d28dc99880b6236bbe5dd5d1d91e716a214/README.md), [AI log](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/3ea59d28dc99880b6236bbe5dd5d1d91e716a214/ai-log/etapa-05.md) | Read the Stage 5 documentation |
 | S5-R8 | Stage 5 implementation committed and pushed to GitHub | [Stage 5 commit](https://github.com/wqedgheudcfbesfbnver/BankFlow/commit/3ea59d28dc99880b6236bbe5dd5d1d91e716a214) | Check the GitHub commit history |
+
+---
+
+## Stage 6: Data from a Mock API
+
+In Stage 6, BankFlow was connected to a REST API
+using json-server.
+
+The bank accounts are no longer stored directly
+inside the React component. They are loaded
+from db.json through HTTP requests.
+
+### Technologies used
+
+- React
+- useState
+- useEffect
+- Fetch API
+- Async / Await
+- json-server 0.17.4
+- Vite environment variables
+
+### API Configuration
+
+The API runs on port 3001.
+
+Endpoint:
+http://localhost:3001/conturi
+
+The database contains 5 bank accounts:
+- 3 active accounts
+- 2 inactive accounts
+
+### Running the Application
+
+Open two terminals inside the frontend folder.
+
+Terminal 1 - Start the API:
+
+    npm run api
+
+Terminal 2 - Start React:
+
+    npm run dev
+
+Open the application:
+
+http://localhost:5173
+
+### Application States
+
+BankFlow handles three possible states:
+
+1. Loading - displays a loading message while
+   the application waits for the API response.
+
+2. Success - displays the bank accounts received
+   from the API.
+
+3. Error - displays an error message when
+   the API is unavailable.
+
+### Functionalities
+
+- Load bank accounts from an API
+- Display active and inactive accounts
+- Activate or deactivate accounts locally
+- Delete accounts locally
+- Switch between light and dark mode
+- Display loading and error messages
+- Configure the API URL using VITE_API_URL
+
+Account modifications remain local in Stage 6.
+Server persistence will be implemented in Stage 7.
+
+### Project Status
+
+- [x] Stage 1: Static HTML and CSS
+- [x] Stage 2: JavaScript data logic
+- [x] Stage 3: UI improvements
+- [x] Stage 4: React and Vite
+- [x] Stage 5: Components and local state
+- [x] Stage 6: Data from a mock API
+- [ ] Stage 7: Forms, validation and API persistence

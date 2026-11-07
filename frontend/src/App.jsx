@@ -1,40 +1,12 @@
-/* =========================
-   IMPORTURI
-========================= */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { fetchConturi } from "./api.js";
 import ContList from "./components/ContList.jsx";
-
-/* =========================
-   DATELE INITIALE ALE CONTURILOR
-========================= */
-
-const CONTURI_INITIALE = [
-  {
-    id: 1,
-    nume: "Cont curent",
-    activ: true,
-    tip: "curent"
-  },
-  {
-    id: 2,
-    nume: "Cont economii",
-    activ: true,
-    tip: "economii"
-  },
-  {
-    id: 3,
-    nume: "Depozit vacanta",
-    activ: false,
-    tip: "depozit"
-  }
-];
 
 /* =========================
    TEMA INITIALA
 ========================= */
 
-// Detectam tema sistemului de operare
 function temaInitiala() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches
     ? "dark"
@@ -47,11 +19,83 @@ function temaInitiala() {
 
 export default function App() {
 
-  // State pentru conturile bancare
-  const [conturi, setConturi] = useState(CONTURI_INITIALE);
+  // Conturile vor fi incarcate din API
+  const [conturi, setConturi] = useState([]);
 
-  // State pentru tema aplicatiei
+  // Starea de incarcare
+  const [loading, setLoading] = useState(true);
+
+  // Starea de eroare
+  const [error, setError] = useState(null);
+
+  // Tema aplicatiei
   const [tema, setTema] = useState(temaInitiala);
+
+  /* =========================
+     ETAPA 6 - INCARCARE API
+  ========================= */
+
+  useEffect(() => {
+    let ignore = false;
+
+    async function loadConturi() {
+      try {
+        const data = await fetchConturi();
+
+        if (!Array.isArray(data)) {
+          throw new Error("API-ul nu a returnat o lista de conturi.");
+        }
+
+        // Adaptam datele API la componentele BankFlow
+        const conturiAdaptate = data.map((cont) => {
+          const tipuri = {
+            Current: "curent",
+            Savings: "economii",
+            Deposit: "depozit"
+          };
+
+          return {
+            ...cont,
+            nume: cont.nume ?? cont.accountName,
+            activ: cont.activ ?? cont.active,
+            tip: tipuri[cont.accountType] ?? cont.tip
+          };
+        });
+
+        if (!ignore) {
+          setConturi(conturiAdaptate);
+          setError(null);
+        }
+
+      } catch (err) {
+
+        if (!ignore) {
+          setError(err.message);
+        }
+
+      } finally {
+
+        if (!ignore) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadConturi();
+
+    return () => {
+      ignore = true;
+    };
+
+  }, []);
+
+  /* =========================
+     APLICAREA TEMEI
+  ========================= */
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = tema;
+  }, [tema]);
 
   /* =========================
      ACTIVARE / DEZACTIVARE CONT
@@ -82,13 +126,9 @@ export default function App() {
   ========================= */
 
   function handleTema() {
-    const noua = tema === "dark" ? "light" : "dark";
-
-    // Actualizam state-ul
-    setTema(noua);
-
-    // Aplicam tema pe elementul HTML
-    document.documentElement.dataset.theme = noua;
+    setTema((prev) =>
+      prev === "dark" ? "light" : "dark"
+    );
   }
 
   /* =========================
@@ -99,8 +139,13 @@ export default function App() {
     (cont) => cont.activ === true
   ).length;
 
+  /* =========================
+     INTERFATA APLICATIEI
+  ========================= */
+
   return (
     <>
+
       {/* ANTETUL APLICATIEI */}
 
       <header className="app-header">
@@ -112,7 +157,9 @@ export default function App() {
           onClick={handleTema}
           aria-pressed={tema === "dark"}
         >
-          {tema === "dark" ? "Mod luminos" : "Mod întunecat"}
+          {tema === "dark"
+            ? "Mod luminos"
+            : "Mod întunecat"}
         </button>
 
         <h1>BankFlow</h1>
@@ -136,15 +183,38 @@ export default function App() {
 
           <h2>Conturile mele</h2>
 
-          <ContList
-            conturi={conturi}
-            onToggle={handleToggle}
-            onDelete={handleDelete}
-          />
+          {/* STAREA DE INCARCARE */}
+
+          {loading && (
+            <p className="info">
+              Se încarcă conturile bancare...
+            </p>
+          )}
+
+          {/* STAREA DE EROARE */}
+
+          {error && (
+            <p className="error" role="alert">
+              Nu am putut încărca datele: {error}.
+              Verifică dacă serverul API este pornit
+              folosind comanda npm run api.
+            </p>
+          )}
+
+          {/* AFISAREA CONTURILOR */}
+
+          {!loading && !error && (
+            <ContList
+              conturi={conturi}
+              onToggle={handleToggle}
+              onDelete={handleDelete}
+            />
+          )}
 
         </section>
 
       </main>
+
     </>
   );
 }
