@@ -525,3 +525,17 @@ Server persistence will be implemented in Stage 7.
 - [x] Stage 5: Components and local state
 - [x] Stage 6: Data from a mock API
 - [ ] Stage 7: Forms, validation and API persistence
+
+---
+
+## Stage 6 Checklist
+
+| ID | Requirement | Where (permalink) | How to check |
+|---|---|---|---|
+| S6-R1 | npm run api starts and the API returns JSON | [package.json](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/4550a38/frontend/package.json#L6-L12), [db.json](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/4550a38/frontend/db.json) | Run npm run api and open localhost:3001/conturi |
+| S6-R2 | Data is no longer hardcoded in React | [App.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/4550a38/frontend/src/App.jsx) | Check useState([]) and useEffect |
+| S6-R3 | Loading message is displayed while waiting | [App.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/4550a38/frontend/src/App.jsx) | Start API with --delay 4000 and refresh |
+| S6-R4 | Error message appears when API is unavailable | [App.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/4550a38/frontend/src/App.jsx) | Stop the API and refresh the page |
+| S6-R5 | Fetch is isolated in api.js and API URL uses environment variables | [api.js](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/4550a38/frontend/src/api.js#L1-L13), [.env.example](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/4550a38/frontend/.env.example) | Check fetch, res.ok and VITE_API_URL |
+| S6-R6 | README Stage 6 section and AI log are completed | [README.md](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/main/README.md), [AI log](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/4550a38/ai-log/etapa-06.md) | Read the documentation |
+| S6-R7 | Stage 6 commit is pushed to GitHub | [Stage 6 commit](https://github.com/wqedgheudcfbesfbnver/BankFlow/commit/4550a38) | Check commit history |
