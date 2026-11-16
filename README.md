@@ -950,3 +950,39 @@ functionality developed in Stage 7.
 ### Next Stage
 
 Stage 9: Own backend with Node.js and Express.
+
+## Stage 8 – Verification Checklist
+
+| ID | Requirement | Where (permalink) | How to check |
+|---|---|---|---|
+| S8-R1 | Header navigation changes pages without reload | [App.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/frontend/src/App.jsx#L15-L54), [Layout.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/frontend/src/components/Layout.jsx#L69-L90) | Click navigation links and inspect Network |
+| S8-R2 | Clicking an account opens its detail page | [ContCard.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/frontend/src/components/ContCard.jsx#L45-L54), [ContDetaliuPage.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/frontend/src/pages/ContDetaliuPage.jsx#L14-L63) | Click an account name |
+| S8-R3 | Detail URL supports refresh and missing IDs display an error | [ContDetaliuPage.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/frontend/src/pages/ContDetaliuPage.jsx#L32-L94) | Refresh /conturi/1 and open /conturi/999 |
+| S8-R4 | Unknown URLs display the application's 404 page | [App.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/frontend/src/App.jsx#L44-L48), [NotFoundPage.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/frontend/src/pages/NotFoundPage.jsx#L8-L37) | Open /ceva |
+| S8-R5 | Component styles are organized with CSS Modules | [Components folder](https://github.com/wqedgheudcfbesfbnver/BankFlow/tree/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/frontend/src/components), [Pages folder](https://github.com/wqedgheudcfbesfbnver/BankFlow/tree/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/frontend/src/pages), [index.css](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/frontend/src/index.css) | Inspect CSS Module imports and shared styles |
+| S8-R6 | Automated testing attributes are preserved and the detail route matches tw.json | [tw.json](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/tw.json), [Layout.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/frontend/src/components/Layout.jsx#L70-L90), [ContCard.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/frontend/src/components/ContCard.jsx), [ContDetaliuPage.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/frontend/src/pages/ContDetaliuPage.jsx) | Inspect data-testid attributes and /conturi/:id |
+| S8-R7 | README documentation and AI log are complete | [README.md](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/README.md), [AI Log etapa-08.md](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/c39ec03bbd7f5521b136b35b8b23f2503f7d4921/ai-log/etapa-08.md) | Read the documentation |
+| S8-R8 | Stage 8 commit was published on GitHub | [Stage 8 commit](https://github.com/wqedgheudcfbesfbnver/BankFlow/commit/c39ec03bbd7f5521b136b35b8b23f2503f7d4921) | Check GitHub commit history |
+
+### Stage 8 – Final Checklist
+
+- [x] S8-R1 – React Router and header navigation
+- [x] S8-R2 – Individual account detail pages
+- [x] S8-R3 – Detail loading and missing ID error handling
+- [x] S8-R4 – Custom 404 page
+- [x] S8-R5 – CSS Modules organization
+- [x] S8-R6 – Automated testing attributes
+- [x] S8-R7 – README and AI log
+- [x] S8-R8 – Stage 8 commit published on GitHub
+
+### Stage 8 – Conclusion
+
+BankFlow Stage 8 introduces React Router,
+dynamic account detail pages, shared navigation,
+custom error pages and CSS Modules.
+
+All existing CRUD functionality from Stage 7
+has been preserved.
+
+The application is prepared for Stage 9,
+which introduces a custom Node.js and Express backend.
