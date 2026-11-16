@@ -1,0 +1,48 @@
+
+/* =========================
+   BANKFLOW - ETAPA 8
+   PAGINA CONTURILOR
+========================= */
+
+/* =========================
+   LAYOUT DOUA COLOANE
+========================= */
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: start;
+  gap: 24px;
+  width: 100%;
+}
+
+/* =========================
+   CONTOR CONTURI
+========================= */
+
+.summary {
+  margin: -8px 0 24px;
+
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+
+  color: var(--muted);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+  .grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .summary {
+    margin-bottom: 20px;
+  }
+
+}

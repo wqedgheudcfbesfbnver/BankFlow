@@ -1,0 +1,335 @@
+
+/* =========================
+   BANKFLOW - ETAPA 8
+   STILURI GLOBALE
+========================= */
+
+/* =========================
+   RESET GENERAL
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+/* =========================
+   VARIABILE - MOD LUMINOS
+========================= */
+
+:root {
+  font-family: Arial, sans-serif;
+  color-scheme: light;
+
+  --bg: #f4f7fc;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #64748b;
+
+  --accent: #1d4ed8;
+  --accent-dark: #1e40af;
+  --accent-soft: #dbeafe;
+
+  --border: #dce4f0;
+
+  --current: #2563eb;
+  --savings: #059669;
+  --deposit: #9333ea;
+
+  --danger: #dc2626;
+  --danger-soft: #fef2f2;
+
+  --error-bg: #fef2f2;
+  --error-border: #fca5a5;
+
+  --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+
+  --radius: 12px;
+}
+
+/* =========================
+   VARIABILE - MOD INTUNECAT
+========================= */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+
+  --accent: #60a5fa;
+  --accent-dark: #3b82f6;
+  --accent-soft: #1e3a5f;
+
+  --border: #334155;
+
+  --current: #60a5fa;
+  --savings: #34d399;
+  --deposit: #c084fc;
+
+  --danger: #f87171;
+  --danger-soft: #450a0a;
+
+  --error-bg: #450a0a;
+  --error-border: #7f1d1d;
+
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================
+   BODY
+========================= */
+
+body {
+  margin: 0;
+
+  min-width: 320px;
+  min-height: 100vh;
+
+  background: var(--bg);
+  color: var(--text);
+
+  font-family: Arial, sans-serif;
+  line-height: 1.5;
+}
+
+/* =========================
+   ROOT REACT
+========================= */
+
+#root {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto;
+  padding: 28px;
+}
+
+/* =========================
+   ELEMENTE GENERALE
+========================= */
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+a {
+  color: var(--accent);
+}
+
+button {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* =========================
+   PANOURI COMUNE
+========================= */
+
+.panel {
+  padding: 25px;
+
+  background: var(--card);
+
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  box-shadow: var(--shadow);
+}
+
+.panel h2 {
+  margin: 0 0 22px;
+
+  font-size: 22px;
+  color: var(--text);
+}
+
+.panel h3 {
+  color: var(--text);
+}
+
+.panel p {
+  line-height: 1.7;
+}
+
+/* =========================
+   BUTOANE GENERALE
+========================= */
+
+.btn {
+  display: inline-block;
+
+  padding: 12px 16px;
+
+  background: var(--accent-dark);
+  color: white;
+
+  border: none;
+  border-radius: 10px;
+
+  font-weight: 700;
+  text-align: center;
+
+  transition: 0.2s;
+}
+
+.btn:hover:not(:disabled) {
+  background: var(--accent);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* =========================
+   BUTON STERGERE
+========================= */
+
+.btn-danger {
+  padding: 10px 14px;
+
+  background: var(--danger-soft);
+  color: var(--danger);
+
+  border: 1px solid var(--danger);
+  border-radius: 9px;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.btn-danger:hover {
+  background: var(--danger);
+  color: white;
+}
+
+/* =========================
+   ETICHETE TIP CONT
+========================= */
+
+.badge {
+  display: inline-block;
+
+  padding: 5px 11px;
+
+  border-radius: 20px;
+
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* =========================
+   CONT CURENT
+========================= */
+
+.badge-curent {
+  background: var(--accent-soft);
+  color: var(--current);
+}
+
+/* =========================
+   CONT ECONOMII
+========================= */
+
+.badge-economii {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--savings);
+}
+
+/* =========================
+   CONT DEPOZIT
+========================= */
+
+.badge-depozit {
+  background: rgba(147, 51, 234, 0.12);
+  color: var(--deposit);
+}
+
+/* =========================
+   MESAJE INFORMARE
+========================= */
+
+.info {
+  padding: 14px;
+
+  color: var(--muted);
+  text-align: center;
+}
+
+/* =========================
+   MESAJE EROARE
+========================= */
+
+.error {
+  padding: 12px 14px;
+
+  background: var(--error-bg);
+  color: var(--danger);
+
+  border: 1px solid var(--error-border);
+  border-radius: 10px;
+
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+/* =========================
+   LISTA GOALA
+========================= */
+
+.empty {
+  padding: 25px;
+
+  text-align: center;
+  color: var(--muted);
+
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+}
+
+/* =========================
+   SELECTIE TEXT
+========================= */
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--text);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+  #root {
+    padding: 15px;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+
+  .panel h2 {
+    font-size: 20px;
+  }
+
+  .btn-danger {
+    padding: 9px 12px;
+  }
+
+}
+
+/* =========================
+   FINAL - BANKFLOW ETAPA 8
+========================= */

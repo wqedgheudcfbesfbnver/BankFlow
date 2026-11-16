@@ -1,16 +1,19 @@
 
 /* =========================
-   ETAPA 7 - BANKFLOW API
+   BANKFLOW - ETAPA 8
+   API REST
 ========================= */
 
 export const API_URL =
-  import.meta.env.VITE_API_URL ?? "http://localhost:3001";
+  import.meta.env.VITE_API_URL ??
+  "http://localhost:3001";
 
 /* =========================
    FUNCTIE COMUNA REQUEST
 ========================= */
 
 async function request(path, options = {}) {
+
   const res = await fetch(`${API_URL}${path}`, {
     ...options,
     headers: {
@@ -23,7 +26,6 @@ async function request(path, options = {}) {
     throw new Error(`Eroare server: ${res.status}`);
   }
 
-  // Unele raspunsuri nu contin date
   if (res.status === 204) {
     return null;
   }
@@ -32,11 +34,20 @@ async function request(path, options = {}) {
 }
 
 /* =========================
-   GET - CITIRE CONTURI
+   GET - TOATE CONTURILE
 ========================= */
 
 export function fetchConturi() {
   return request("/conturi");
+}
+
+/* =========================
+   GET - UN SINGUR CONT
+   NOU IN ETAPA 8
+========================= */
+
+export function fetchCont(id) {
+  return request(`/conturi/${encodeURIComponent(id)}`);
 }
 
 /* =========================

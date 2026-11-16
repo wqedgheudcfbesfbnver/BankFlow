@@ -1,0 +1,117 @@
+
+/* =========================
+   BANKFLOW - ETAPA 8
+   STILURI PAGINA DETALII
+========================= */
+
+.detail {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 32px;
+}
+
+/* =========================
+   LINK INAPOI
+========================= */
+
+.back {
+  display: inline-block;
+  margin-bottom: 24px;
+
+  color: var(--accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.back:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   TITLU CONT
+========================= */
+
+.title {
+  margin: 0 0 10px;
+
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--text);
+}
+
+.subtitle {
+  margin: 0 0 28px;
+
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* =========================
+   INFORMATII CONT
+========================= */
+
+.fields {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 18px 24px;
+
+  margin: 0;
+  padding: 24px;
+
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+.fields dt {
+  color: var(--muted);
+  font-weight: 600;
+}
+
+.fields dd {
+  margin: 0;
+
+  color: var(--text);
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+/* =========================
+   STARE CONT
+========================= */
+
+.active {
+  color: var(--savings);
+  font-weight: 700;
+}
+
+.inactive {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+  .detail {
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  .fields {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 18px;
+  }
+
+  .fields dd {
+    margin-bottom: 12px;
+  }
+}
+

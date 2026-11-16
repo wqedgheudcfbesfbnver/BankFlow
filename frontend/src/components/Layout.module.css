@@ -1,0 +1,148 @@
+
+/* =========================
+   BANKFLOW - ETAPA 8
+   LAYOUT MODULE
+========================= */
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 90vh;
+}
+
+/* =========================
+   ANTET
+========================= */
+
+.header {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+}
+
+.inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+
+  padding: 22px 28px;
+}
+
+/* =========================
+   LOGO BANKFLOW
+========================= */
+
+.logo {
+  font-size: 30px;
+  font-weight: 800;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* =========================
+   MENIU NAVIGARE
+========================= */
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.link {
+  padding: 11px 17px;
+
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 600;
+
+  border-radius: 10px;
+  transition: 0.2s;
+}
+
+.link:hover {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* =========================
+   BUTON TEMA
+========================= */
+
+.themeToggle {
+  padding: 11px 16px;
+
+  background: var(--accent-soft);
+  color: var(--accent);
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.themeToggle:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* =========================
+   CONTINUT PRINCIPAL
+========================= */
+
+.main {
+  flex: 1;
+  width: 100%;
+  padding: 30px 0;
+}
+
+/* =========================
+   SUBSOL
+========================= */
+
+.footer {
+  padding: 22px;
+  text-align: center;
+
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 700px) {
+
+  .inner {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: center;
+    padding: 20px;
+  }
+
+  .nav {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .themeToggle {
+    width: 100%;
+  }
+
+  .main {
+    padding: 20px 0;
+  }
+
+}

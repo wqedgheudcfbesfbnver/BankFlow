@@ -672,3 +672,281 @@ controlled inputs and automated testing attributes.
 - [x] Stage 6: Mock API integration
 - [x] Stage 7: Form and validation
 - [ ] Stage 8: Routing and detail page
+
+
+## Stage 7 – Verification Checklist
+
+| ID | Requirement | Where (permalink) | How to check |
+|---|---|---|---|
+| S7-R1 | Controlled form: value and onChange on every field | [ContForm.jsx - controlled fields](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/9f428a8/frontend/src/components/ContForm.jsx#L105-L144) | Read the input and select implementation |
+| S7-R2 | Empty account name shows an error and no request is sent | [ContForm.jsx - validation](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/9f428a8/frontend/src/components/ContForm.jsx#L40-L71) | Submit an empty form and check the Network tab |
+| S7-R3 | Added account appears in the list and survives refresh | [App.jsx - handleAdd](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/9f428a8/frontend/src/App.jsx#L115-L138), [api.js - POST](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/9f428a8/frontend/src/api.js#L42-L47) | Add an account and refresh the page |
+| S7-R4 | Toggle and delete operations survive refresh | [App.jsx - handleToggle and handleDelete](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/9f428a8/frontend/src/App.jsx#L144-L188) | Toggle or delete an account and refresh |
+| S7-R5 | Submit button is disabled while saving and the form clears only on success | [ContForm.jsx - handleSubmit](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/9f428a8/frontend/src/components/ContForm.jsx#L60-L98), [Submit button](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/9f428a8/frontend/src/components/ContForm.jsx#L154-L160) | Use API delay, then stop API and retry |
+| S7-R6 | tw.json and required data-testid attributes are implemented | [tw.json](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/9f428a8/tw.json), [ContCard.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/9f428a8/frontend/src/components/ContCard.jsx#L18-L70), [ContList.jsx](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/9f428a8/frontend/src/components/ContList.jsx#L16-L24) | Inspect the attributes using querySelectorAll |
+| S7-R7 | README Stage 7 documentation and AI log are complete | [README.md](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/9f428a8/README.md), [AI log](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/9f428a8/ai-log/etapa-07.md) | Read both documentation files |
+| S7-R8 | Stage 7 commit is published on GitHub | [Stage 7 commit](https://github.com/wqedgheudcfbesfbnver/BankFlow/commit/9f428a8b1708d374d3fb91e5ce1614a2199f5546) | Check the repository commit history |
+
+### Stage 7 – Final Results
+
+- [x] S7-R1 – Controlled React form
+- [x] S7-R2 – Form validation
+- [x] S7-R3 – Persistent account creation
+- [x] S7-R4 – Persistent toggle and delete
+- [x] S7-R5 – Submit state and error handling
+- [x] S7-R6 – Automated testing attributes
+- [x] S7-R7 – README and AI documentation
+- [x] S7-R8 – Stage 7 commit published
+
+### Build Verification
+
+The application was successfully built using:
+
+`npm run build`
+
+Result: Build successful, 20 modules transformed.
+
+### Stage 7 Conclusion
+
+BankFlow Stage 7 implements a controlled form,
+validation, persistent CRUD operations, REST API
+communication, error handling and automated testing
+attributes.
+
+All main functionality was manually tested.
+
+## Stage 8: Routing and Component Styling – BankFlow
+
+### Overview
+
+In Stage 8, BankFlow was extended with
+client-side navigation using React Router.
+
+The application now includes multiple pages,
+a dedicated detail page for every bank account,
+an About page and a custom 404 page.
+
+Component-specific styles were reorganized
+using CSS Modules.
+
+All CRUD functionality implemented in Stage 7
+was preserved.
+
+### Implemented Features
+
+1. Navigation between pages using React Router.
+2. Shared layout with header and footer.
+3. Navigation menu using NavLink.
+4. Bank account list on the homepage.
+5. Individual detail pages for bank accounts.
+6. Dynamic routes using account IDs.
+7. Loading account details directly from the API.
+8. Error handling for nonexistent accounts.
+9. Custom 404 page for invalid URLs.
+10. CSS Modules for component styling.
+11. Light and dark mode support.
+12. Preservation of CRUD operations.
+13. Automated testing attributes.
+
+### Application Routes
+
+| Route | Description |
+|-------|-------------|
+| / | Bank account list and creation form |
+| /conturi/:id | Individual bank account details |
+| /despre | About BankFlow |
+| * | Custom 404 page |
+
+### React Router
+
+React Router was installed using:
+
+npm install react-router-dom
+
+BrowserRouter was added to main.jsx.
+
+App.jsx contains the route configuration.
+
+The Layout component uses Outlet to render
+the currently selected page.
+
+NavLink is used for the navigation menu,
+while Link is used for account details
+and navigation back to the homepage.
+
+### Bank Account Detail Page
+
+Each bank account has its own detail page.
+
+Example:
+
+/conturi/1
+
+The account ID is obtained using useParams().
+
+The page requests account data from the API
+using the fetchCont(id) function.
+
+Displayed information includes:
+
+- Account name
+- Account type
+- Account status
+- Account category
+- Account owner
+- Account ID
+
+### API Communication
+
+The API was extended with:
+
+GET /conturi/:id
+
+The fetchCont(id) function retrieves an
+individual account from json-server.
+
+The existing CRUD operations remain available:
+
+- GET /conturi
+- POST /conturi
+- PATCH /conturi/:id
+- DELETE /conturi/:id
+
+### Error Handling
+
+If an account does not exist, the API
+returns HTTP 404.
+
+The detail page displays an error message
+and a link back to the account list.
+
+Unknown application URLs are handled by
+NotFoundPage.jsx.
+
+### CSS Modules
+
+Component styles were separated into
+individual CSS Module files.
+
+These include:
+
+- Layout.module.css
+- ContForm.module.css
+- ContCard.module.css
+- ContList.module.css
+- ConturiPage.module.css
+- ContDetaliuPage.module.css
+
+The global index.css contains shared styles,
+theme variables, buttons, badges and panels.
+
+### Light and Dark Mode
+
+The application preserves the light/dark
+theme functionality introduced previously.
+
+The theme button is now located in Layout.jsx
+and is available on every page.
+
+### Automated Testing
+
+Stage 8 introduces additional data-testid
+attributes:
+
+- nav
+- item-link
+- detail
+- detail-title
+- not-found
+
+The attributes from Stage 7 are preserved.
+
+The detail route matches the resource
+defined in tw.json:
+
+/conturi/:id
+
+### Manual Testing
+
+The following scenarios were tested:
+
+1. Navigation from the homepage to account details.
+2. Displaying the correct bank account information.
+3. Returning to the homepage using Link.
+4. Opening the About page.
+5. Using the light/dark theme.
+6. Opening a nonexistent account (/conturi/999).
+7. Displaying the custom 404 page (/ceva).
+8. Creating a bank account using POST.
+9. Preserving account creation after refresh.
+10. Updating account status using PATCH.
+11. Deleting an account using DELETE.
+12. Preserving CRUD changes after refresh.
+
+### Project Structure
+
+frontend/src/
+- App.jsx
+- main.jsx
+- api.js
+- constants.js
+- index.css
+- components/
+  - Layout.jsx
+  - Layout.module.css
+  - ContForm.jsx
+  - ContForm.module.css
+  - ContCard.jsx
+  - ContCard.module.css
+  - ContList.jsx
+  - ContList.module.css
+- pages/
+  - ConturiPage.jsx
+  - ConturiPage.module.css
+  - ContDetaliuPage.jsx
+  - ContDetaliuPage.module.css
+  - DesprePage.jsx
+  - NotFoundPage.jsx
+
+### Technologies Used
+
+- React
+- JavaScript
+- Vite
+- React Router
+- CSS Modules
+- JSON Server
+- REST API
+- Git
+- GitHub
+
+### Conclusion
+
+Stage 8 transforms BankFlow into a
+multi-page React application.
+
+Navigation is handled by React Router,
+account details are loaded dynamically
+from the API, and component styles
+are organized using CSS Modules.
+
+The application maintains the CRUD
+functionality developed in Stage 7.
+
+### Stage 8 Status
+
+- [x] React Router integration
+- [x] Shared application layout
+- [x] Homepage and account list
+- [x] Dynamic bank account detail page
+- [x] About page
+- [x] Custom 404 page
+- [x] CSS Modules
+- [x] Light and dark mode
+- [x] CRUD functionality preserved
+- [x] Manual navigation tests
+- [ ] GitHub publication and checklist
+
+### Next Stage
+
+Stage 9: Own backend with Node.js and Express.

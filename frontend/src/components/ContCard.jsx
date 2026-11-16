@@ -1,14 +1,14 @@
 
+import { Link } from "react-router-dom";
+
+import { ETICHETE_TIP } from "../constants.js";
+
+import styles from "./ContCard.module.css";
+
 /* =========================
-   ETAPA 7 - BANKFLOW
+   BANKFLOW - ETAPA 8
    COMPONENTA CONTCARD
 ========================= */
-
-const ETICHETE_TIP = {
-  curent: "Curent",
-  economii: "Economii",
-  depozit: "Depozit"
-};
 
 export default function ContCard({
   cont,
@@ -20,52 +20,65 @@ export default function ContCard({
     <li
       className={
         cont.activ
-          ? "item-card"
-          : "item-card done"
+          ? styles.card
+          : `${styles.card} ${styles.done}`
       }
       data-testid="item"
       data-id={cont.id}
     >
 
-      {/* ACTIVARE / DEZACTIVARE */}
+      {/* CONTINUT CARD */}
 
-      <label className="item-main">
+      <div className={styles.main}>
+
+        {/* ACTIVARE / DEZACTIVARE */}
 
         <input
           type="checkbox"
+          className={styles.checkbox}
           checked={Boolean(cont.activ)}
           onChange={() => onToggle(cont.id)}
           aria-label={`Activează sau dezactivează ${cont.nume}`}
           data-testid="item-toggle"
         />
 
-        <div className="item-details">
+        <div className={styles.details}>
 
-          {/* NUMELE CONTULUI */}
+          {/* LINK CATRE DETALIILE CONTULUI */}
 
-          <h3 data-testid="item-title">
-            {cont.nume}
-          </h3>
+          <Link
+            to={`/conturi/${cont.id}`}
+            className={styles.title}
+            data-testid="item-link"
+          >
+            <span data-testid="item-title">
+              {cont.nume}
+            </span>
+          </Link>
 
           {/* TIPUL CONTULUI */}
 
-          <span
-            className={`badge badge-${cont.tip}`}
-          >
-            {ETICHETE_TIP[cont.tip] ?? cont.tip}
-          </span>
+          <div className={styles.badgeRow}>
+
+            <span
+              className={`badge badge-${cont.tip}`}
+            >
+              {ETICHETE_TIP[cont.tip] ?? cont.tip}
+            </span>
+
+          </div>
 
           {/* STAREA CONTULUI */}
 
-          <p className="item-status">
+          <p className={styles.status}>
             {cont.activ ? "Activ" : "Inactiv"}
           </p>
 
         </div>
 
-      </label>
+      </div>
 
-      {/* STERGERE CONT */}
+      {/* BUTON STERGERE */}
 
       <button
         type="button"

@@ -1,8 +1,10 @@
 
 import ContCard from "./ContCard.jsx";
 
+import styles from "./ContList.module.css";
+
 /* =========================
-   ETAPA 7 - BANKFLOW
+   BANKFLOW - ETAPA 8
    COMPONENTA CONTLIST
 ========================= */
 
@@ -33,7 +35,7 @@ export default function ContList({
   ========================= */
 
   return (
-    <ul className="item-list">
+    <ul className={styles.list}>
 
       {conturi.map((cont) => (
 

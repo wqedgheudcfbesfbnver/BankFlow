@@ -1,28 +1,14 @@
 
 import { useState, useRef } from "react";
 
+import { TIPURI_CONT } from "../constants.js";
+
+import styles from "./ContForm.module.css";
+
 /* =========================
-   ETAPA 7 - BANKFLOW
+   BANKFLOW - ETAPA 8
    FORMULAR CONT BANCAR
 ========================= */
-
-const TIPURI_CONT = [
-  {
-    value: "Current",
-    label: "Cont curent",
-    tip: "curent"
-  },
-  {
-    value: "Savings",
-    label: "Cont economii",
-    tip: "economii"
-  },
-  {
-    value: "Deposit",
-    label: "Cont depozit",
-    tip: "depozit"
-  }
-];
 
 const NUME_MAX = 100;
 
@@ -40,6 +26,7 @@ export default function ContForm({ onAdd }) {
   ========================= */
 
   function valideaza() {
+
     const numeCuratat = nume.trim();
 
     if (numeCuratat === "") {
@@ -62,8 +49,10 @@ export default function ContForm({ onAdd }) {
   ========================= */
 
   async function handleSubmit(e) {
+
     e.preventDefault();
 
+    // Prevenim trimiterea dubla
     if (trimitereInCurs.current) {
       return;
     }
@@ -84,22 +73,28 @@ export default function ContForm({ onAdd }) {
     trimitereInCurs.current = true;
 
     try {
+
+      // Adaugarea se face prin API
       await onAdd({
         nume: nume.trim(),
         tip: tipSelectat.tip,
         activ: true
       });
 
-      // Golim doar dupa salvarea reusita
+      // Golim formularul doar dupa succes
       setNume("");
       setAccountType("Current");
 
     } catch (err) {
+
+      // Afisam eroarea fara sa pierdem textul
       setEroare(err.message);
 
     } finally {
+
       setTrimite(false);
       trimitereInCurs.current = false;
+
     }
   }
 
@@ -109,16 +104,19 @@ export default function ContForm({ onAdd }) {
 
   return (
     <form
-      className="cont-form"
+      className={styles.form}
       onSubmit={handleSubmit}
       noValidate
       data-testid="form"
     >
 
-      <label>
+      {/* NUMELE CONTULUI */}
+
+      <label htmlFor="account-name">
         Numele contului
 
         <input
+          id="account-name"
           type="text"
           value={nume}
           onChange={(e) => {
@@ -132,10 +130,13 @@ export default function ContForm({ onAdd }) {
         />
       </label>
 
-      <label>
+      {/* TIPUL CONTULUI */}
+
+      <label htmlFor="account-type">
         Tipul contului
 
         <select
+          id="account-type"
           value={accountType}
           onChange={(e) => setAccountType(e.target.value)}
           data-testid="form-accountType"
@@ -151,17 +152,23 @@ export default function ContForm({ onAdd }) {
         </select>
       </label>
 
+      {/* MESAJ EROARE */}
+
       {eroare && (
         <p
           className="error"
+          role="alert"
           data-testid="form-error"
         >
           {eroare}
         </p>
       )}
 
+      {/* BUTON ADAUGARE */}
+
       <button
         type="submit"
+        className={`btn ${styles.submit}`}
         disabled={trimite}
         data-testid="form-submit"
       >
