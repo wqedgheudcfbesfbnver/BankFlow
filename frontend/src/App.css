@@ -1,111 +1,175 @@
+
 /* =========================
-   SETARI GENERALE
+   BANKFLOW - ETAPA 7
+   DESIGN COMPLET
+========================= */
+
+/* =========================
+   CULORI - MOD LUMINOS
+========================= */
+
+:root {
+  font-family: Arial, sans-serif;
+  color-scheme: light;
+
+  --bg: #f4f7fc;
+  --card: #ffffff;
+  --text: #172033;
+  --muted: #64748b;
+
+  --accent: #1d4ed8;
+  --accent-dark: #1e40af;
+  --accent-soft: #dbeafe;
+
+  --border: #dce4f0;
+
+  --current: #2563eb;
+  --savings: #059669;
+  --deposit: #9333ea;
+
+  --danger: #dc2626;
+  --danger-soft: #fef2f2;
+
+  --shadow: 0 8px 24px rgba(15, 23, 42, 0.06);
+}
+
+/* =========================
+   CULORI - MOD INTUNECAT
+========================= */
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0f172a;
+  --card: #1e293b;
+  --text: #f1f5f9;
+  --muted: #94a3b8;
+
+  --accent: #60a5fa;
+  --accent-dark: #3b82f6;
+  --accent-soft: #1e3a5f;
+
+  --border: #334155;
+
+  --current: #60a5fa;
+  --savings: #34d399;
+  --deposit: #c084fc;
+
+  --danger: #f87171;
+  --danger-soft: #450a0a;
+
+  --shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+/* =========================
+   STIL GENERAL
 ========================= */
 
 * {
-    box-sizing: border-box;
-}
-
-:root {
-    --bg: #f4f5f7;
-    --card: #ffffff;
-
-    --text: #1f2933;
-    --muted: #6b7280;
-
-    --accent: #1d4ed8;
-    --accent-dark: #1e40af;
-    --accent-soft: #dbeafe;
-
-    --border: #e5e7eb;
-
-    --current: #2563eb;
-    --savings: #16a34a;
-    --deposit: #9333ea;
+  box-sizing: border-box;
 }
 
 body {
-    margin: 0;
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
 
-    font-family:
-        system-ui,
-        -apple-system,
-        "Segoe UI",
-        Roboto,
-        sans-serif;
+  background: var(--bg);
+  color: var(--text);
 
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.5;
+  font-family: Arial, sans-serif;
+}
+
+#root {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 28px;
+}
+
+button,
+input,
+select {
+  font: inherit;
 }
 
 /* =========================
-   HEADER
+   HEADER BANKFLOW
 ========================= */
 
 .app-header {
-    position: relative;
-    background: var(--accent);
-    color: white;
-    text-align: center;
-    padding: 30px 20px;
+  position: relative;
+  text-align: center;
+  padding: 35px 20px;
+  margin-bottom: 28px;
+
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+
+  box-shadow: var(--shadow);
 }
 
 .app-header h1 {
-    margin: 0;
-    font-size: 36px;
+  margin: 0 0 12px;
+
+  font-size: 38px;
+  font-weight: 800;
+
+  color: var(--accent);
 }
 
 .app-header p {
-    margin: 6px 0;
+  margin: 8px 0;
+  color: var(--muted);
 }
 
 .app-count {
-    font-size: 14px;
-    opacity: 0.9;
+  margin-top: 18px !important;
+
+  font-size: 17px;
+  font-weight: bold;
+
+  color: var(--text) !important;
 }
 
 /* =========================
-   ETAPA 5 - BUTON LIGHT/DARK MODE
+   BUTON LIGHT / DARK
 ========================= */
 
 .theme-toggle {
-    position: absolute;
-    top: 12px;
-    right: 16px;
+  position: absolute;
+  top: 18px;
+  right: 18px;
 
-    padding: 6px 12px;
-    border: 1px solid rgba(255, 255, 255, 0.6);
-    border-radius: 8px;
+  padding: 10px 16px;
 
-    background: transparent;
-    color: #ffffff;
+  background: var(--accent-soft);
+  color: var(--accent);
 
-    font: inherit;
-    font-size: 14px;
-    cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 10px;
 
-    transition: background 0.2s;
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: 0.2s;
 }
 
 .theme-toggle:hover {
-    background: rgba(255, 255, 255, 0.15);
+  background: var(--accent);
+  color: var(--card);
 }
 
 /* =========================
-   CONTAINER PRINCIPAL
+   LAYOUT DOUA COLOANE
 ========================= */
 
 .container {
-    max-width: 1000px;
-    margin: 24px auto;
-    padding: 0 16px;
-
-    display: grid;
-    grid-template-columns: 1fr;
-
-    gap: 24px;
-    align-items: start;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-items: start;
+  gap: 24px;
 }
 
 /* =========================
@@ -113,54 +177,106 @@ body {
 ========================= */
 
 .panel {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
+  padding: 25px;
+
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  box-shadow: var(--shadow);
 }
 
 .panel h2 {
-    margin-top: 0;
+  margin: 0 0 22px;
+
+  font-size: 22px;
+  color: var(--text);
 }
 
 /* =========================
-   FORMULAR
+   FORMULAR ADAUGARE CONT
 ========================= */
 
-.item-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
+.cont-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
-.item-form label {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-    font-weight: 600;
+.cont-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  color: var(--text);
 }
 
-.item-form input,
-.item-form select {
-    padding: 10px;
-    border: 1px solid var(--border);
-    border-radius: 7px;
-    background: var(--card);
-    color: var(--text);
+.cont-form input,
+.cont-form select {
+  width: 100%;
+  padding: 13px 14px;
+
+  background: var(--card);
+  color: var(--text);
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  outline: none;
+  transition: 0.2s;
 }
 
-.item-form button {
-    padding: 11px;
-    border: none;
-    border-radius: 7px;
-    background: var(--accent);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
+.cont-form input:focus,
+.cont-form select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
 }
 
-.item-form button:hover {
-    background: var(--accent-dark);
+.cont-form input::placeholder {
+  color: var(--muted);
+}
+
+/* =========================
+   VALIDARE FORMULAR
+========================= */
+
+.cont-form input[aria-invalid="true"] {
+  border-color: var(--danger);
+}
+
+.cont-form input[aria-invalid="true"]:focus {
+  box-shadow: 0 0 0 3px var(--danger-soft);
+}
+
+/* =========================
+   BUTON ADAUGARE
+========================= */
+
+.cont-form button {
+  padding: 14px;
+
+  background: var(--accent-dark);
+  color: white;
+
+  border: none;
+  border-radius: 10px;
+
+  font-weight: 700;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.cont-form button:hover:not(:disabled) {
+  background: var(--accent);
+}
+
+.cont-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 /* =========================
@@ -168,82 +284,162 @@ body {
 ========================= */
 
 .item-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 15px;
 
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* =========================
-   CARD CONT
+   CARD CONT BANCAR
 ========================= */
 
 .item-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
 
-    padding: 14px 16px;
-    border: 1px solid var(--border);
-    border-radius: 10px;
+  padding: 18px;
 
-    transition: 0.2s;
+  background: var(--card);
+
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  transition: 0.2s;
 }
 
 .item-card:hover {
-    border-color: var(--accent);
-    background: var(--accent-soft);
+  border-color: var(--accent);
+  box-shadow: var(--shadow);
 }
 
-.item-card h3 {
-    margin: 0 0 8px 0;
+.item-card.done {
+  opacity: 0.75;
 }
 
 /* =========================
-   BADGE
+   CONTINUT CARD
+========================= */
+
+.item-main {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  flex: 1;
+  min-width: 0;
+  cursor: pointer;
+}
+
+.item-main input[type="checkbox"] {
+  width: 19px;
+  height: 19px;
+
+  accent-color: var(--accent-dark);
+  cursor: pointer;
+}
+
+.item-details {
+  min-width: 0;
+}
+
+.item-details h3 {
+  margin: 0 0 9px;
+
+  font-size: 17px;
+  overflow-wrap: anywhere;
+  color: var(--text);
+}
+
+.item-status {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* =========================
+   ETICHETE TIP CONT
 ========================= */
 
 .badge {
-    display: inline-block;
-    padding: 4px 10px;
-    border-radius: 20px;
+  display: inline-block;
+  padding: 5px 11px;
 
-    color: white;
-    font-size: 12px;
-    font-weight: 600;
+  border-radius: 20px;
+
+  font-size: 12px;
+  font-weight: 700;
 }
 
-.badge-current {
-    background: var(--current);
+.badge-curent {
+  background: var(--accent-soft);
+  color: var(--current);
 }
 
-.badge-savings {
-    background: var(--savings);
+.badge-economii {
+  background: rgba(16, 185, 129, 0.12);
+  color: var(--savings);
 }
 
-.badge-deposit {
-    background: var(--deposit);
-}
-
-/* =========================
-   STATUS
-========================= */
-
-.status {
-    color: var(--muted);
-    font-size: 14px;
+.badge-depozit {
+  background: rgba(147, 51, 234, 0.12);
+  color: var(--deposit);
 }
 
 /* =========================
-   CONT INACTIV
+   BUTON STERGERE
 ========================= */
 
-.item-card.done h3 {
-    text-decoration: line-through;
-    color: var(--muted);
+.btn-danger {
+  padding: 10px 14px;
+
+  background: var(--danger-soft);
+  color: var(--danger);
+
+  border: 1px solid var(--danger);
+  border-radius: 9px;
+
+  font-weight: 600;
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+.btn-danger:hover {
+  background: var(--danger);
+  color: white;
+}
+
+/* =========================
+   MESAJE INFORMATII
+========================= */
+
+.info {
+  padding: 14px;
+  text-align: center;
+
+  color: var(--muted);
+}
+
+/* =========================
+   MESAJE EROARE
+========================= */
+
+.error {
+  padding: 12px 14px;
+
+  background: var(--danger-soft);
+  color: var(--danger);
+
+  border: 1px solid var(--danger);
+  border-radius: 10px;
+
+  font-size: 14px;
 }
 
 /* =========================
@@ -251,141 +447,53 @@ body {
 ========================= */
 
 .empty {
-    color: var(--muted);
-    text-align: center;
+  padding: 25px;
+
+  text-align: center;
+  color: var(--muted);
+
+  border: 1px dashed var(--border);
+  border-radius: 12px;
 }
 
 /* =========================
-   FOOTER
-========================= */
-
-.app-footer {
-    text-align: center;
-    padding: 20px;
-    color: var(--muted);
-    font-size: 14px;
-}
-
-/* =========================
-   FOCUS TASTATURA
-========================= */
-
-:focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
-}
-
-/* =========================
-   RESPONSIVE
+   DESIGN RESPONSIVE
 ========================= */
 
 @media (max-width: 700px) {
-    .container {
-        grid-template-columns: 1fr;
-    }
 
-    .app-header {
-        padding-top: 55px;
-    }
-}
+  #root {
+    padding: 15px;
+  }
 
-/* =========================
-   ETAPA 5 - DARK MODE AUTOMAT
-========================= */
+  .container {
+    grid-template-columns: 1fr;
+  }
 
-/* Tema sistemului se aplica automat
-   daca utilizatorul nu a ales modul luminos */
+  .app-header {
+    padding: 25px 15px;
+  }
 
-@media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-        --bg: #111827;
-        --card: #1f2937;
-        --text: #f3f4f6;
-        --muted: #9ca3af;
-        --border: #374151;
-        --accent-soft: #172554;
-    }
-}
+  .app-header h1 {
+    font-size: 30px;
+  }
 
-/* =========================
-   ETAPA 5 - DARK MODE MANUAL
-========================= */
+  .theme-toggle {
+    position: static;
+    display: block;
 
-/* Tema intunecata selectata din buton */
+    margin: 0 0 20px auto;
+  }
 
-:root[data-theme="dark"] {
-    --bg: #111827;
-    --card: #1f2937;
-    --text: #f3f4f6;
-    --muted: #9ca3af;
-    --border: #374151;
-    --accent-soft: #172554;
-}
+  .panel {
+    padding: 18px;
+  }
 
-/* =========================
-   ETAPA 5 - CHECKBOX CONTURI
-========================= */
+  .item-card {
+    flex-wrap: wrap;
+  }
 
-.item-main {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    cursor: pointer;
-}
-
-.item-main input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
-    accent-color: var(--accent);
-    cursor: pointer;
-}
-
-/* =========================
-   ETAPA 5 - BUTON STERGERE
-========================= */
-
-.btn-danger {
-    border: 1px solid #dc3545;
-    background: transparent;
-    color: #dc3545;
-    border-radius: 8px;
-    padding: 6px 12px;
-
-    font: inherit;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.btn-danger:hover {
-    background: #dc3545;
-    color: #ffffff;
-}
-
-/* =========================
-   ETAPA 6 - LOADING SI ERROR
-========================= */
-
-.info {
-  color: var(--muted, #6b7280);
-  font-size: 15px;
-  padding: 12px;
-  text-align: center;
-}
-
-.error {
-  color: #be123c;
-  background: #fff1f2;
-  border: 1px solid #fda4af;
-  border-radius: 8px;
-  padding: 12px 16px;
-  margin-top: 12px;
-  font-size: 14px;
-}
-
-/* Mesaj de eroare in Dark Mode */
-
-[data-theme="dark"] .error {
-  color: #fda4af;
-  background: #3b1d2e;
-  border-color: #9f1239;
+  .btn-danger {
+    margin-left: auto;
+  }
 }

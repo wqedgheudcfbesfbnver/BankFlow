@@ -539,3 +539,136 @@ Server persistence will be implemented in Stage 7.
 | S6-R5 | Fetch is isolated in api.js and API URL uses environment variables | [api.js](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/4550a38/frontend/src/api.js#L1-L13), [.env.example](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/4550a38/frontend/.env.example) | Check fetch, res.ok and VITE_API_URL |
 | S6-R6 | README Stage 6 section and AI log are completed | [README.md](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/main/README.md), [AI log](https://github.com/wqedgheudcfbesfbnver/BankFlow/blob/4550a38/ai-log/etapa-06.md) | Read the documentation |
 | S6-R7 | Stage 6 commit is pushed to GitHub | [Stage 6 commit](https://github.com/wqedgheudcfbesfbnver/BankFlow/commit/4550a38) | Check commit history |
+
+
+
+## Stage 7: Form and Validation – BankFlow
+
+### Overview
+
+In Stage 7, BankFlow was extended with a controlled
+React form for creating bank accounts.
+
+The application now supports all four CRUD operations
+using a mock REST API powered by json-server.
+
+All changes are saved on the server before the
+React interface is updated.
+
+### Implemented Features
+
+1. Add bank accounts using a controlled React form.
+2. Validate the account name before submitting.
+3. Select the account type:
+   - Current
+   - Savings
+   - Deposit
+4. Save new accounts using HTTP POST.
+5. Activate or deactivate accounts using HTTP PATCH.
+6. Delete accounts using HTTP DELETE.
+7. Load accounts from the server using HTTP GET.
+8. Preserve changes after refreshing the page.
+9. Display validation and server errors in the interface.
+10. Disable the submit button while saving.
+11. Keep form values when a server request fails.
+12. Support light and dark mode.
+13. Provide data-testid attributes for automated testing.
+
+### CRUD Operations
+
+| Operation | HTTP Method | Endpoint |
+|-----------|-------------|----------|
+| Read accounts | GET | /conturi |
+| Create account | POST | /conturi |
+| Update account | PATCH | /conturi/:id |
+| Delete account | DELETE | /conturi/:id |
+
+### Form Validation
+
+The form validates the account name before sending data.
+
+Validation rules:
+- Account name is required.
+- Maximum account name length: 100 characters.
+- Account type must be valid.
+- Error messages are displayed inside the form.
+- Invalid data is not submitted to the server.
+
+### Server Communication
+
+All HTTP requests are handled in:
+
+frontend/src/api.js
+
+The API uses a common request function.
+
+The React state is updated only after the server
+confirms that the operation was successful.
+
+### Automated Testing
+
+The tw.json file is located in the repository root.
+
+It defines:
+- resource: conturi
+- title: accountName
+- done: active
+- sample: accountType = Savings
+
+The application uses data-testid attributes
+for automated verification.
+
+### Testing Results
+
+The following scenarios were tested manually:
+
+- Empty account name displays a validation error.
+- A new account is added successfully.
+- The new account remains after refreshing the page.
+- Changing account status persists after refresh.
+- Deleting an account persists after refresh.
+- Stopping the API displays an error message.
+- The form keeps its values when saving fails.
+- Restarting the API allows the operation to be retried.
+
+### Files Modified or Created
+
+- frontend/src/api.js
+- frontend/src/App.jsx
+- frontend/src/App.css
+- frontend/src/components/ContForm.jsx
+- frontend/src/components/ContCard.jsx
+- frontend/src/components/ContList.jsx
+- tw.json
+
+### Technologies Used
+
+- React
+- JavaScript
+- Vite
+- CSS
+- JSON Server
+- REST API
+- Git and GitHub
+
+### Conclusion
+
+Stage 7 adds complete CRUD functionality to BankFlow.
+
+The application can create, display, update and delete
+bank accounts, with persistent data storage through
+a mock REST API.
+
+The interface includes form validation, error handling,
+controlled inputs and automated testing attributes.
+
+## Status
+
+- [x] Stage 1: Static mockup
+- [x] Stage 2: JavaScript logic
+- [x] Stage 3: User interface styling
+- [x] Stage 4: React and Vite
+- [x] Stage 5: React components
+- [x] Stage 6: Mock API integration
+- [x] Stage 7: Form and validation
+- [ ] Stage 8: Routing and detail page

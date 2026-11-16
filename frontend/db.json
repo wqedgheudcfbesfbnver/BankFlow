@@ -1,4 +1,3 @@
-
 {
   "conturi": [
     {
@@ -40,6 +39,14 @@
       "accountType": "Deposit",
       "category": "Personal",
       "user": "Ana"
+    },
+    {
+      "accountName": "Cont test etapa 7",
+      "accountType": "Savings",
+      "active": false,
+      "category": "Personal",
+      "user": "Ana",
+      "id": 6
     }
   ]
 }

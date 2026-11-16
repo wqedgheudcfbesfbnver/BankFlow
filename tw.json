@@ -1,0 +1,9 @@
+
+{
+  "resource": "conturi",
+  "title": "accountName",
+  "done": "active",
+  "sample": {
+    "accountType": "Savings"
+  }
+}

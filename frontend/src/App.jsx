@@ -1,7 +1,47 @@
 
 import { useEffect, useState } from "react";
-import { fetchConturi } from "./api.js";
+
+import "./App.css";
+
+
 import ContList from "./components/ContList.jsx";
+import ContForm from "./components/ContForm.jsx";
+
+import {
+  fetchConturi,
+  createCont,
+  updateCont,
+  deleteCont
+} from "./api.js";
+
+/* =========================
+   ETAPA 7 - BANKFLOW
+========================= */
+
+const TIPURI_API = {
+  curent: "Current",
+  economii: "Savings",
+  depozit: "Deposit"
+};
+
+const TIPURI_INTERFATA = {
+  Current: "curent",
+  Savings: "economii",
+  Deposit: "depozit"
+};
+
+/* =========================
+   ADAPTAREA DATELOR DIN API
+========================= */
+
+function adapteazaCont(cont) {
+  return {
+    ...cont,
+    nume: cont.accountName ?? cont.nume,
+    activ: cont.active ?? cont.activ ?? false,
+    tip: TIPURI_INTERFATA[cont.accountType] ?? cont.tip
+  };
+}
 
 /* =========================
    TEMA INITIALA
@@ -19,20 +59,13 @@ function temaInitiala() {
 
 export default function App() {
 
-  // Conturile vor fi incarcate din API
   const [conturi, setConturi] = useState([]);
-
-  // Starea de incarcare
   const [loading, setLoading] = useState(true);
-
-  // Starea de eroare
   const [error, setError] = useState(null);
-
-  // Tema aplicatiei
   const [tema, setTema] = useState(temaInitiala);
 
   /* =========================
-     ETAPA 6 - INCARCARE API
+     GET - INCARCARE CONTURI
   ========================= */
 
   useEffect(() => {
@@ -43,24 +76,12 @@ export default function App() {
         const data = await fetchConturi();
 
         if (!Array.isArray(data)) {
-          throw new Error("API-ul nu a returnat o lista de conturi.");
+          throw new Error(
+            "API-ul nu a returnat o lista de conturi."
+          );
         }
 
-        // Adaptam datele API la componentele BankFlow
-        const conturiAdaptate = data.map((cont) => {
-          const tipuri = {
-            Current: "curent",
-            Savings: "economii",
-            Deposit: "depozit"
-          };
-
-          return {
-            ...cont,
-            nume: cont.nume ?? cont.accountName,
-            activ: cont.activ ?? cont.active,
-            tip: tipuri[cont.accountType] ?? cont.tip
-          };
-        });
+        const conturiAdaptate = data.map(adapteazaCont);
 
         if (!ignore) {
           setConturi(conturiAdaptate);
@@ -68,13 +89,11 @@ export default function App() {
         }
 
       } catch (err) {
-
         if (!ignore) {
           setError(err.message);
         }
 
       } finally {
-
         if (!ignore) {
           setLoading(false);
         }
@@ -86,7 +105,6 @@ export default function App() {
     return () => {
       ignore = true;
     };
-
   }, []);
 
   /* =========================
@@ -98,27 +116,85 @@ export default function App() {
   }, [tema]);
 
   /* =========================
-     ACTIVARE / DEZACTIVARE CONT
+     POST - ADAUGARE CONT
   ========================= */
 
-  function handleToggle(id) {
-    setConturi((prev) =>
-      prev.map((cont) =>
-        cont.id === id
-          ? { ...cont, activ: !cont.activ }
-          : cont
-      )
-    );
+  async function handleAdd(contNou) {
+
+    const utilizator =
+      conturi.find((cont) => cont.user)?.user ??
+      "Utilizator";
+
+    const datePentruServer = {
+      accountName: contNou.nume,
+      accountType: TIPURI_API[contNou.tip],
+      active: contNou.activ,
+      category: "Personal",
+      user: utilizator
+    };
+
+    // Mai intai salvam pe server
+    const creat = await createCont(datePentruServer);
+
+    // Folosim obiectul returnat de server
+    setConturi((prev) => [
+      ...prev,
+      adapteazaCont(creat)
+    ]);
+
+    setError(null);
   }
 
   /* =========================
-     STERGERE CONT
+     PATCH - ACTIVARE / DEZACTIVARE
   ========================= */
 
-  function handleDelete(id) {
-    setConturi((prev) =>
-      prev.filter((cont) => cont.id !== id)
-    );
+  async function handleToggle(id) {
+
+    const cont = conturi.find((c) => c.id === id);
+
+    if (!cont) return;
+
+    try {
+      setError(null);
+
+      const actualizat = await updateCont(id, {
+        active: !cont.activ
+      });
+
+      const contAdaptat = adapteazaCont(actualizat);
+
+      setConturi((prev) =>
+        prev.map((c) =>
+          c.id === id ? contAdaptat : c
+        )
+      );
+
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  /* =========================
+     DELETE - STERGERE CONT
+  ========================= */
+
+  async function handleDelete(id) {
+
+    try {
+      setError(null);
+
+      // Stergem mai intai de pe server
+      await deleteCont(id);
+
+      // Eliminam contul din interfata
+      setConturi((prev) =>
+        prev.filter((c) => c.id !== id)
+      );
+
+    } catch (err) {
+      setError(err.message);
+    }
   }
 
   /* =========================
@@ -140,17 +216,13 @@ export default function App() {
   ).length;
 
   /* =========================
-     INTERFATA APLICATIEI
+     INTERFATA BANKFLOW
   ========================= */
 
   return (
     <>
 
-      {/* ANTETUL APLICATIEI */}
-
       <header className="app-header">
-
-        {/* BUTON LIGHT / DARK MODE */}
 
         <button
           className="theme-toggle"
@@ -165,7 +237,7 @@ export default function App() {
         <h1>BankFlow</h1>
 
         <p>
-          Aplicatie pentru gestionarea conturilor bancare.
+          Aplicație pentru gestionarea conturilor bancare.
         </p>
 
         <p className="app-count">
@@ -175,35 +247,44 @@ export default function App() {
 
       </header>
 
-      {/* CONTINUTUL PRINCIPAL */}
-
       <main className="container">
+
+        {/* FORMULAR ADAUGARE CONT */}
+
+        <section className="panel">
+
+          <h2>Adaugă cont bancar</h2>
+
+          <ContForm onAdd={handleAdd} />
+
+        </section>
+
+        {/* LISTA CONTURILOR */}
 
         <section className="panel">
 
           <h2>Conturile mele</h2>
 
-          {/* STAREA DE INCARCARE */}
-
           {loading && (
-            <p className="info">
+            <p
+              className="info"
+              data-testid="loading"
+            >
               Se încarcă conturile bancare...
             </p>
           )}
 
-          {/* STAREA DE EROARE */}
-
           {error && (
-            <p className="error" role="alert">
-              Nu am putut încărca datele: {error}.
-              Verifică dacă serverul API este pornit
-              folosind comanda npm run api.
+            <p
+              className="error"
+              role="alert"
+              data-testid="error"
+            >
+              Eroare: {error}
             </p>
           )}
 
-          {/* AFISAREA CONTURILOR */}
-
-          {!loading && !error && (
+          {!loading && (
             <ContList
               conturi={conturi}
               onToggle={handleToggle}

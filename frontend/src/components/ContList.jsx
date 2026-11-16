@@ -1,31 +1,51 @@
-/* =========================
-   COMPONENTA LISTEI DE CONTURI
-========================= */
 
 import ContCard from "./ContCard.jsx";
 
-export default function ContList({ conturi, onToggle, onDelete }) {
+/* =========================
+   ETAPA 7 - BANKFLOW
+   COMPONENTA CONTLIST
+========================= */
 
-  // Verificam daca lista este goala
+export default function ContList({
+  conturi,
+  onToggle,
+  onDelete
+}) {
+
+  /* =========================
+     VERIFICARE LISTA GOALA
+  ========================= */
+
   if (conturi.length === 0) {
     return (
-      <p className="empty">
-        Nu exista niciun cont bancar.
+      <p
+        className="empty"
+        data-testid="empty"
+      >
+        Nu există niciun cont bancar.
+        Adaugă primul cont folosind formularul.
       </p>
     );
   }
 
-  // Generam automat cardurile din array
+  /* =========================
+     AFISAREA CONTURILOR
+  ========================= */
+
   return (
     <ul className="item-list">
+
       {conturi.map((cont) => (
+
         <ContCard
           key={cont.id}
           cont={cont}
           onToggle={onToggle}
           onDelete={onDelete}
         />
+
       ))}
+
     </ul>
   );
 }
